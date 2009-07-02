@@ -10,6 +10,7 @@ Usage: joue [OPTION]... [INPUT]
 
 Mandatory arguments to long options are mandatory for short options too.
 
+  -p, --port=PORT        use said MIDI port, if a number, go through ALSA
   -b, --bars=EXCERPT     play bars according to EXCERPT specification
   -c, --check            check MIDI file without performing it
   -s, --speed=FACTOR     adjust speed, bigger the slower, default is 100
@@ -32,6 +33,31 @@ With no FILE or if FILE is -, read Standard Input.  Files suffixed with
 `.gz' files are automatically uncompressed.
 """
 
+# TODO for this module:
+#
+# Add comment boxes to all functions.
+#
+# I wonder if zero_timeval should not be better computed at the time of the
+# first soundful event.  There might be a lot of MIDI communication setup at
+# the beginning of a MIDI file, possibly causing some ugly catchup right at
+# the start of the performance.
+#
+# After a SIGCONT, zero_timeval should be reset to the current time, so it
+# is possible to suspend playback without later catchup.
+#
+# Add a fake track for bars, and report them as we go on.
+#
+# An option to produce track timing only.
+#
+# An option to produce a merged format 0 from format 1.
+#
+# An option to merge many format 0 and format 1 inputs into a single type 1,
+# with control over tracks and channels.
+#
+# Compute an annotated bar and track matrix, with catchup code at each bar.
+#
+# Make it interactive to play selected bars and tracks.  Think `fdesign'.
+
 import sys
 
 #  -m, --map=IN..OUT      map IN selection into OUT selection
@@ -39,14 +65,15 @@ import sys
 def main(*arguments):
     import midi
     # Decode program options.
+    port = None
     check_mode = False
     console = False
     debug = midi.DUMP_METAS
     import getopt
     options, arguments = getopt.getopt(
-        arguments, 'D:b:cd:fkm:s:t:x:z',
+        arguments, 'D:b:cd:fkm:p:s:t:x:z',
         ('bars=', 'channel-zero', 'check', 'console', 'debug=', 'drum=',
-         'extract=', 'freeeze-channel', 'help', 'map=' 'speed=',
+         'extract=', 'freeeze-channel', 'help', 'map=' 'port=', 'speed=',
          'transpose=', 'version'))
     for option, value in options:
         if option == '--help':
@@ -70,6 +97,8 @@ def main(*arguments):
             console = True
         elif option in ('-m', '--map'):
             pass
+        elif option in ('-p', '--port'):
+            port = int(value)
         elif option in ('-s', '--speed'):
             midi.run.speed_factor = int(value)
         elif option in ('-t', '--transpose'):
@@ -93,7 +122,12 @@ def main(*arguments):
         from dumper import Dumper
         midi_file.serial_process(Dumper(flags=debug))
     else:
-        from midiport import MidiPort
+        if isinstance(port, int):
+            from alsaport import AlsaPort
+            midiport = AlsaPort(port)
+        else:
+            from midiport import MidiPort
+            midiport = MidiPort(port)
         if debug or console:
             processor = midi.MultiProcessor()
             if debug:
@@ -102,9 +136,9 @@ def main(*arguments):
             if console:
                 from console import Console
                 processor.add(Console())
-            processor.add(MidiPort())
+            processor.add(midiport)
         else:
-            processor = MidiPort()
+            processor = midiport
         midi_file.parallel_process(processor)
 
 def decode_bars(argument):

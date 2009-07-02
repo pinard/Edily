@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: Latin-1 -*-
+# -*- coding: UTF-8 -*-
 
 import sys
 sys.path.insert(0, '.')
@@ -16,7 +16,7 @@ alsa = Extension('Midi.alsa',
 
 setup(name=__package__, version=__version__,
       description="MIDI tools for Python.",
-      author='François Pinard', author_email='pinard@iro.umontreal.ca',
+      author='FranÃ§ois Pinard', author_email='pinard@iro.umontreal.ca',
       url='http://www.iro.umontreal.ca/~pinard',
       ext_modules=[alsa], cmdclass={'build_ext': build_ext},
       scripts=['joue'], packages=['Midi'])

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-# -*- coding: Latin-1 -*-
-# Copyright © 1995, 1998, 2000, 2003 Progiciels Bourbeau-Pinard inc.
-# François Pinard <pinard@iro.umontreal.ca>.
+# -*- coding: UTF-8 -*-
+# Copyright Â© 1995, 1998, 2000, 2003 Progiciels Bourbeau-Pinard inc.
+# FranÃ§ois Pinard <pinard@iro.umontreal.ca>.
 
 import midi
 

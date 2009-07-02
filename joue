@@ -1,6 +1,7 @@
 #!/usr/bin/env python
-# Copyright © 2003 Progiciels Bourbeau-Pinard inc.
-# François Pinard <pinard@iro.umontreal.ca>, 2003-06.
+# -*- coding: UTF-8 -*-
+# Copyright Â© 2003 Progiciels Bourbeau-Pinard inc.
+# FranÃ§ois Pinard <pinard@iro.umontreal.ca>, 2003-06.
 
 """\
 MIDI tools for Python - Simple player.

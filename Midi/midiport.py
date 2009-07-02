@@ -8,7 +8,6 @@ import midi
 class MidiPort(midi.Player, midi.Encoder):
     def __init__(self, device=None):
         if device is None:
-            # We once used '/dev/midi00'.
             device = '/dev/midi'
         midi.Player.__init__(self)
         self.device = file(device, 'w')

@@ -1,0 +1,12 @@
+joue
+setup.py
+Midi/__init__.py
+Midi/alsaport.py
+Midi/console.py
+Midi/dumper.py
+Midi/main.py
+Midi/midi.py
+Midi/midiport.py
+Midi/writer.py
+src/alsa.pyx
+src/mymidikbd.c

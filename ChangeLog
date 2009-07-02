@@ -1,0 +1,5 @@
+2000-01-21  François Pinard  <pinard@iro.umontreal.ca>
+
+	* src/Makefile.am (LIBS):
+	(INCLUDES):
+

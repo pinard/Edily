@@ -1,0 +1,24 @@
+* Ideas for `joue'
+
+.* Add comment boxes to all functions.
+
+.* I wonder if zero_timeval should not be better computed at the time of the
+   first soundful event.  There might be a lot of MIDI communication setup at
+   the beginning of a MIDI file, possibly causing some ugly catchup right at
+   the start of the performance.
+
+.* After a SIGCONT, zero_timeval should be reset to the current time, so it is
+   possible to suspend playback without later catchup.
+
+.* Add a fake track for bars, and report them as we go on.
+
+.* An option to produce track timing only.
+
+.* An option to produce a merged format 0 from format 1.
+
+.* An option to merge many format 0 and format 1 inputs into a single type 1,
+   with control over tracks and channels.
+
+.* Compute an annotated bar and track matrix, with catchup code at each bar.
+
+.* Make it interactive to play selected bars and tracks.  Think `fdesign'.

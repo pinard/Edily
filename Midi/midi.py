@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 # Copyright © 1995, 1998, 2000, 2003 Progiciels Bourbeau-Pinard inc.
 # François Pinard <pinard@iro.umontreal.ca>.
 
@@ -29,6 +29,7 @@ def reset():
 reset()
 
 class Decoder:
+
     def __init__(self, input):
         buffer = input.read()
         self.header = Header(buffer)
@@ -79,6 +80,7 @@ class Decoder:
                         track.dispatch_event(processor)
 
 class Chunk:
+
     def __init__(self, magic, buffer, position, number):
         assert buffer[position:position+4] == magic, (
             buffer[position:position+4], magic)
@@ -96,6 +98,7 @@ class Chunk:
         self.number = number            # track number for printing
 
 class Header(Chunk):
+
     def __init__(self, buffer):
         Chunk.__init__(self, 'MThd', buffer, 0, 0)
         self.midi_file_format = self.decode_intfix_2()
@@ -113,6 +116,7 @@ class Header(Chunk):
         return value
 
 class Track(Chunk):
+
     def __init__(self, buffer, position, track):
         Chunk.__init__(self, 'MTrk', buffer, position, track)
         self.running_status = None      # running status after last event
@@ -449,6 +453,7 @@ class MultiProcessor:
             getattr(processor, function_name)(*arguments)
 
 class Encoder(Processor):
+
     def __init__(self, write):
         self.write = write
 
@@ -562,6 +567,7 @@ class Encoder(Processor):
         self.write(text)
 
 class Player(Processor):
+
     def __init__(self):
         # When ABSOLUTE is True, one second has DIVISION time units.
         # Otherwise, one quarter note has DIVISION time units.

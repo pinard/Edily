@@ -15,8 +15,7 @@
         </fp:section>
 
         <fp:section title="Source files">
-          <fp:entry text="Browse" href="http://github.com/pinard/Edily"/>
-          <fp:entry text="Download" href="/archives"/>
+          <fp:entry text="Browse" href="https://github.com/pinard/Edily"/>
         </fp:section>
 
       </with-param>

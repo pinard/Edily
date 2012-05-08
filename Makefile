@@ -6,7 +6,7 @@ PYSETUP = python setup.py
 DISTRIBUTION = Midi-0.2
 
 all:
-	$(PYSETUP) build
+	$(PYSETUP) --quiet build
 
 install: all
 	$(PYSETUP) install

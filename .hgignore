@@ -1,0 +1,12 @@
+syntax: glob
+build
+src/alsa.c
+*~
+*.pyc
+*.swp
+admin/*
+archives/*
+html-*
+rawmidi
+web/notes/*
+

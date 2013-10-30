@@ -5,7 +5,7 @@
 PYSETUP = python setup.py
 DISTRIBUTION = Midi-0.2
 
-all:
+all pregithub:
 	$(PYSETUP) --quiet build
 
 install: all

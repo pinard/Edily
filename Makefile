@@ -37,11 +37,8 @@ ifneq "$(wildcard ~/etc/mes-sites/site.mk)" ""
 site: site-all
 
 package_name = Edily
-rootdir = $(HOME)/GitHub/edily/web
 margin_color = "\#ffb747"
 caption_color = "\#cccccc"
-
-SITE_ROOT = 1
 
 include ~/etc/mes-sites/site.mk
 
